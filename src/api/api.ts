@@ -44,10 +44,17 @@ type TaskType = {
     addedDate:string
 }
 
+
 type ResponseTaskType = {
     items: TaskType[],
     totalCount: number,
     error: string | null
+}
+
+type GeneralTaskType = {
+    resultCode: number,
+    messages: [],
+    data:TaskType
 }
 
 export const todoListAPI = {
@@ -73,6 +80,14 @@ export const todoListAPI = {
     },
 
     createTask(todolistId: string, title: string){
-        return instance.post(`/todo-lists/${todolistId}/tasks`, {title})
+        return instance.post<GeneralTaskType>(`/todo-lists/${todolistId}/tasks`, {title})
+    },
+
+    updateTask(todolistId: string, taskId: string, title: string) {
+        return instance.put<GeneralTaskType>(`/todo-lists/${todolistId}/tasks/${taskId}`, {title})
+    },
+
+    deleteTask(todolistId: string, taskId: string,){
+        return instance.delete<GeneralTaskType>(`/todo-lists/${todolistId}/tasks/${taskId}`)
     }
 }
