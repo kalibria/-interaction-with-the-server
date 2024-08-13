@@ -70,5 +70,9 @@ export const todoListAPI = {
 
     getTasks(todolistId: string){
         return instance.get<ResponseTaskType>(`/todo-lists/${todolistId}/tasks`)
+    },
+
+    createTask(todolistId: string, title: string){
+        return instance.post(`/todo-lists/${todolistId}/tasks`, {title})
     }
 }

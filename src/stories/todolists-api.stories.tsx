@@ -28,7 +28,7 @@ export const CreateTodolist = () => {
     useEffect(() => {
        todoListAPI.createTodoList()
             .then((res) => {
-                setState(res.data.data.item)
+                setState(res.data.data)
             })
     }, [])
 
@@ -72,5 +72,18 @@ export const GetTasks = () => {
             setState(res.data.items)
         })
     }, [])
+    return <div>{JSON.stringify(state)}</div>
+}
+
+export const CreateTask = () => {
+    const [state, setState] = useState<any>(null)
+    useEffect(() => {
+        const todolistId = "fd8995ba-e0c1-4152-9026-342c7b46a261";
+        todoListAPI.createTask(todolistId, 'React')
+            .then((res) => {
+                setState(res.data.data)
+            })
+    }, [])
+
     return <div>{JSON.stringify(state)}</div>
 }
